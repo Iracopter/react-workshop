@@ -3,19 +3,31 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchDataList} from '../../store/features/dataListSlice'
 import {Loader} from 'semantic-ui-react';
 
-function DataList(){
-
-    const dispatch=useDispatch();
+function DataList({ handleSaveToFavorite},{handleMoreInfo}){
 
     const currentPage=1;
 
-    const {searchQuery}=useSelector(state=>state.search);
+    const {searchQuery,
+            minCalories,
+            maxCalories}=useSelector(state=>state.search);
 
     const {dataList, isLoading} = useSelector(state=>state.dataList);
 
+    const dispatch=useDispatch();
+
     useEffect(()=>{
-        dispatch(fetchDataList(searchQuery, currentPage));
-    },[searchQuery, dispatch])
+        if(searchQuery==="") return;
+
+        dispatch(fetchDataList({searchQuery, 
+            page:currentPage,
+            minCalories,
+            maxCalories,
+        }));
+    },[
+        searchQuery,
+        minCalories,
+        maxCalories, 
+        dispatch])
 
 
     if (isLoading){
@@ -23,17 +35,21 @@ function DataList(){
             <Loader active inline='centered'/>
         )
     }
-    console.log(dataList);
+   
+
     return(
         <div>
             {dataList.map((image,index)=>(
                 <div key={index} className="datalist-item">
                     <p>{image.title}</p>
                     <img src={image.image}/>
+                    <button onClick={() => handleMoreInfo(image.title, image.image, [image.analyzedInstructions])}>Детальніше</button>
+                    <button onClick={() => handleSaveToFavorite(image.title, image.image, [image.analyzedInstructions])}>В обрані</button>
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
+
 
 export default DataList;

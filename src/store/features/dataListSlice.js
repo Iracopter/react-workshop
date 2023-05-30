@@ -29,10 +29,13 @@ export const dataListSlice=createSlice({
 
 export const {setDataList, setError, setTotalPages, setisLoading} = dataListSlice.actions;
 
-export const fetchDataList=(searchQuery, page)=>async(dispatch)=>{
+export const fetchDataList=({searchQuery, 
+                            page,
+                            minCalories,
+                            maxCalories,})=>async(dispatch)=>{
     dispatch(setisLoading(true));
     try{
-        const data=await getInfo({queryString: searchQuery, page});
+        const data=await getInfo({queryString: searchQuery, page, minCalories, maxCalories});
         dispatch(setDataList(data.results));
         dispatch(setTotalPages(data.totalResults));
     } 

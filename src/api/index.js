@@ -4,13 +4,15 @@ const BASE_URL='https://rapidapi.com/spoonacular/api/recipe-food-nutrition/';
 export async function getInfo({
     queryString='',
     page=1,
-    includeIngredients='',
+    addRecipeInformation=true,
+    minCalories=50,
+    maxCalories=800,
 }){
     /*const url=`${BASE_URL}/?key=${API_KEY}&query=${queryString}&includeIngredients=${includeIngredients}&excludeIngredients=${excludeIngredients}`;*/
-    const url = `https://api.spoonacular.com/recipes/search?apiKey=${API_KEY}&q=${queryString}&page=${page}&includeIngredients=${includeIngredients}`;
+    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&includeIngredients=${queryString}&minCalories=${minCalories}&maxCalories=${maxCalories}&addRecipeInformation=${addRecipeInformation}&page=${page}`;
     const response = await fetch(url);
     const data= await response.json();
 
+    console.log(data);
     return data;
 }
-
