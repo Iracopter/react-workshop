@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchDataList} from '../../store/features/dataListSlice'
 import {Loader} from 'semantic-ui-react';
 
-function DataList({ handleSaveToFavorite},{handleMoreInfo}){
+function DataList({ handleSaveToFavorite, handleMoreInfo}){
 
     const currentPage=1;
 
