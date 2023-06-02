@@ -31,22 +31,19 @@ function Search(){
                 >Search</Button>   
             </div>
 
-            <Grid columns={3}>
+            <Grid columns={2}>
                 <GridRow>
                     <GridColumn>
+                        <h2>MinCalories:</h2>
                         <Input placeholder="Min calories" 
                             value={minCalories}
                             onChange={(e)=>dispatch(setMinCalories(e.target.value))}/>
                     </GridColumn>
                     <GridColumn>
+                        <h2>MaxCalories:</h2>
                         <Input placeholder="Max calories" 
                         value={maxCalories}
                         onChange={(e)=>dispatch(setMaxCalories(e.target.value))}/>
-                    </GridColumn>
-                    <GridColumn>
-                        <Button
-                        size="big" 
-                        primary>Chosen</Button> 
                     </GridColumn>
                 </GridRow>
             </Grid>

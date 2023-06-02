@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchDataList} from '../../store/features/dataListSlice'
 import {Loader} from 'semantic-ui-react';
 
-function DataList({ handleSaveToFavorite},{handleMoreInfo}){
+function DataList({ handleSaveToFavorite, handleMoreInfo, handleOtherButtonClick}){
 
     const currentPage=1;
 
@@ -43,7 +43,10 @@ function DataList({ handleSaveToFavorite},{handleMoreInfo}){
                 <div key={index} className="datalist-item">
                     <p>{image.title}</p>
                     <img src={image.image}/>
-                    <button onClick={() => handleMoreInfo(image.title, image.image, [image.analyzedInstructions])}>Детальніше</button>
+                    <button onClick={() => {
+                            handleMoreInfo(image.title, image.image, [image.analyzedInstructions]);
+                            handleOtherButtonClick();
+                            }}>Детальніше</button>
                     <button onClick={() => handleSaveToFavorite(image.title, image.image, [image.analyzedInstructions])}>В обрані</button>
                 </div>
             ))}
