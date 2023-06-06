@@ -18,7 +18,7 @@ export const searchSlice=createSlice({
         },
         setMaxCalories:(state, action)=>{
             state.maxCalories=action.payload;
-        }
+        },
     }
 });
 

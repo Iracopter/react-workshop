@@ -1,17 +1,16 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchDataList} from '../../store/features/dataListSlice'
-import {Loader} from 'semantic-ui-react';
+import {fetchDataList, setCurrentPage} from '../../store/features/dataListSlice'
+import {Loader, Button, Pagination} from 'semantic-ui-react';
 
 function DataList({ handleSaveToFavorite, handleMoreInfo, handleOtherButtonClick}){
 
-    const currentPage=1;
-
     const {searchQuery,
-            minCalories,
-            maxCalories}=useSelector(state=>state.search);
+           minCalories,
+           maxCalories,
+           }=useSelector(state=>state.search);
 
-    const {dataList, isLoading} = useSelector(state=>state.dataList);
+    const {dataList, isLoading, currentPage,totalPages} = useSelector(state=>state.dataList);
 
     const dispatch=useDispatch();
 
@@ -27,6 +26,7 @@ function DataList({ handleSaveToFavorite, handleMoreInfo, handleOtherButtonClick
         searchQuery,
         minCalories,
         maxCalories, 
+        currentPage,
         dispatch])
 
 
@@ -35,6 +35,10 @@ function DataList({ handleSaveToFavorite, handleMoreInfo, handleOtherButtonClick
             <Loader active inline='centered'/>
         )
     }
+
+    if(dataList.length===0){
+        return null;
+    }
    
 
     return(
@@ -42,14 +46,22 @@ function DataList({ handleSaveToFavorite, handleMoreInfo, handleOtherButtonClick
             {dataList.map((image,index)=>(
                 <div key={index} className="datalist-item">
                     <p>{image.title}</p>
-                    <img src={image.image}/>
-                    <button onClick={() => {
-                            handleMoreInfo(image.title, image.image, [image.analyzedInstructions]);
+                    <img className="photo" src={image.image}/>
+                    <div className="button-block">
+                    <Button onClick={() => {
+                            handleMoreInfo(image.title, image.image, image.id, [image.analyzedInstructions]);
                             handleOtherButtonClick();
-                            }}>Детальніше</button>
-                    <button onClick={() => handleSaveToFavorite(image.title, image.image, [image.analyzedInstructions])}>В обрані</button>
+                            }}
+                            primary>More details</Button>
+                    <Button onClick={() => handleSaveToFavorite(image.title, image.image, image.id, [image.analyzedInstructions])}
+                            primary>Add to favorites</Button>
+                    </div>
                 </div>
             ))}
+            <Pagination
+            defaultActivePage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(e, {activePage}) => dispatch(setCurrentPage(activePage))}/>
         </div>
     );
 };

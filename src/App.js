@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import 'semantic-ui-css/semantic.min.css';
 import Search from './Components/Search';
 import DataList from './Components/DataList';
@@ -29,27 +29,23 @@ function App() {
 
 
     const [favorites, setFavorites] = useState([]);
-    const handleSaveToFavoriteOther = (title, image, analyzedInstructions) => {
-      const newFavorite = { title, image, analyzedInstructions};
+    const handleSaveToFavoriteOther = (title, image, id, analyzedInstructions) => {
+      const newFavorite = { title, image, id, analyzedInstructions};
       setFavorites(prevFavorites => [...prevFavorites, newFavorite]);
+      alert("The recipe has been added to favorites");
     };
     console.log(favorites);
 
     const [moreinfo, setMoreinfo]=useState([]);
-    const handleGetMoreInfo = (title, image, analyzedInstructions) => {
-      const newInfo = { title, image, analyzedInstructions};
+    const handleGetMoreInfo = (title, image, id, analyzedInstructions) => {
+      const newInfo = { title, image, id, analyzedInstructions};
       setMoreinfo(newInfo);
     };
     console.log("more:", moreinfo)
 
-    function showAlert() {
-      alert("The recipe has been added to favorites");
-    }
 
   return (
     <div className="App">
-      <Button onClick={handleButtonClick}>Favorites</Button>
-      <Button onClick={handleOtherButtonClick}>lalla</Button>
       {showNewPage ? (
         <div>
           <h1>Favorites</h1>
@@ -58,27 +54,39 @@ function App() {
                     <p>{image.title}</p>
                     <img src={image.image}/>
                     <Button onClick={() =>{
-                  handleOtherButtonClick(image.title, image.image, "Analyzed Instructions")}}/>
+                      /*handleGetMoreInfo(image.title, image.image, image.id, [image.analyzedInstructions]);*/
+                      /*handleOtherButtonClick(image.title, image.image, image.id, [image.analyzedInstructions])*/
+                      /*handleGetMoreInfo(image.title, image.image, image.id, [image.analyzedInstructions])*/
+                      handleOtherButtonClick(image.title, image.image, image.id, [image.analyzedInstructions])
+                      }}
+                      primary>More information</Button>
                 </div>
             ))}  
-          <Button onClick={handleBackButtonClick}>Back</Button>
+          <Button onClick={handleBackButtonClick} primary className="Backbtn">Back</Button>
         </div>
       ) : showOtherPage ? (
         <div>
+          <div className="head">
           <h1>Chosen Recepy Page</h1>
+          <button className="fav_button" onClick={handleButtonClick}>Favorites</button>
+          </div>
                 <div key={moreinfo.index} className="datalist-item">
                     <p>{moreinfo.title}</p>
                     <img src={moreinfo.image}/>
                     {moreinfo.analyzedInstructions[0][0].steps.map((step, index) => (
                       <p key={index}>{step.step}</p>
                     ))}
-                    <Button onClick={() => handleSaveToFavoriteOther(moreinfo.title, moreinfo.image, "Analyzed Instructions")}>Додати до улюблених</Button>
+                    <Button onClick={() => handleSaveToFavoriteOther(moreinfo.title, moreinfo.image, moreinfo.id, "Analyzed Instructions")}
+                    primary>Додати до улюблених</Button>
                 </div>
-          <Button onClick={handleBackButtonClick}>Back</Button>
+          <Button onClick={handleBackButtonClick} primary className="Backbtn">Back</Button>
         </div>
       ) : (
         <div>
+          <div className="head">
           <h1>Home page</h1>
+          <button className="fav_button" onClick={handleButtonClick}>Favorites</button>
+          </div>
           <Search/>
           <DataList handleSaveToFavorite={handleSaveToFavoriteOther} 
                     handleMoreInfo={handleGetMoreInfo}

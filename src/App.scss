@@ -1,0 +1,146 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 320px) and (max-width: 329px) {
+  .datalist-item{
+    width: 300px;
+    display: block;
+    border-radius: 30px;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  
+    &:hover{
+      box-shadow: 1px 0px 5px rgb(148, 148, 148);
+    }
+  }
+
+  .head{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0px;
+    padding:0%;
+    font-size: medium;
+    padding-left: 5px;
+    padding-right: 20px;
+    width: 320px;
+  }
+  .search-field{
+    max-width: fit-content;
+    padding-right: 5px;
+  }
+
+  .input_calories{
+    width: 100px;
+  }
+
+  img{
+    max-width: 300px;
+    padding: 0%;
+    margin: 0%;
+  }
+}
+
+@media screen and (min-width: 330px) and (max-width: 340px) {
+  .datalist-item{
+    width: 300px;
+    display: block;
+    border-radius: 30px;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin: auto;
+  
+    &:hover{
+      box-shadow: 1px 0px 5px rgb(148, 148, 148);
+    }
+  }
+
+  .head{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0px;
+    padding:0%;
+    /*margin-right: 10px;*/
+    font-size: medium;
+    padding-left: 5px;
+    padding-right: 20px;
+    width: 320px;
+  }
+  .search-field{
+    max-width: fit-content;
+    padding-right: 5px;
+  }
+
+  .input_calories{
+    width: 100px;
+  }
+
+  img{
+    max-width: 300px;
+    padding: 0%;
+    margin: 0%;
+  }
+}
+
+@media screen and (min-width: 351px) {
+  .head{
+    display: flex;
+    justify-content: center;
+    gap: 74px;
+    margin: 30px 0px;
+  }
+
+  .input_calories{
+    width: 120px;
+  }
+  
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.datalist-item{
+  display: block;
+  border-radius: 30px;
+  margin-top: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+
+  &:hover{
+    box-shadow: 1px 0px 5px rgb(148, 148, 148);
+  }
+}
+
+.fav_button{
+  background-color: rgb(223, 57, 57);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 105px;
+  font-weight: bold;
+
+  &:hover{
+    background-color: rgba(223, 57, 57, 0.795);
+  }
+}
+
+
+
+
+

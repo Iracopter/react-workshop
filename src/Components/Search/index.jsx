@@ -15,7 +15,7 @@ function Search(){
 
     return(
         <div className="search">
-            <div>
+            <div className="search-field">
             <Input
                 size="huge"
                 icon='search'
@@ -31,17 +31,17 @@ function Search(){
                 >Search</Button>   
             </div>
 
-            <Grid columns={2}>
+            <Grid columns={2} className="Rows">
                 <GridRow>
                     <GridColumn>
-                        <h2>MinCalories:</h2>
-                        <Input placeholder="Min calories" 
+                        <h3>MinCalories:</h3>
+                        <Input className="input_calories" placeholder="Min calories" 
                             value={minCalories}
                             onChange={(e)=>dispatch(setMinCalories(e.target.value))}/>
                     </GridColumn>
                     <GridColumn>
-                        <h2>MaxCalories:</h2>
-                        <Input placeholder="Max calories" 
+                        <h3>MaxCalories:</h3>
+                        <Input className="input_calories" placeholder="Max calories" 
                         value={maxCalories}
                         onChange={(e)=>dispatch(setMaxCalories(e.target.value))}/>
                     </GridColumn>

@@ -6,6 +6,7 @@ const initialState={
     isLoading:false,
     error:null,
     totalPages:0,
+    currentPage:1,
 };
 
 export const dataListSlice=createSlice({
@@ -23,11 +24,14 @@ export const dataListSlice=createSlice({
         },
         setTotalPages:(state,action)=>{
             state.totalPages=action.payload / 20;
+        },
+        setCurrentPage:(state, action)=>{
+            state.currentPage =action.payload;
         }
     }
 });
 
-export const {setDataList, setError, setTotalPages, setisLoading} = dataListSlice.actions;
+export const {setDataList, setError, setTotalPages, setisLoading, setCurrentPage} = dataListSlice.actions;
 
 export const fetchDataList=({searchQuery, 
                             page,
